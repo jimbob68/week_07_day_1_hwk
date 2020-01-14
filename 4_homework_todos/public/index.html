@@ -3,12 +3,27 @@
   <head>
     <meta charset="utf-8">
     <title>To do list</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css">
     <script src="./js/bundle.js"></script>
   </head>
   <body>
-  <div id="app">
 
-  </div>
+<div id="app">
+<h1>My Todo List</h1>
+  <ul>
+    <li v-for="(task, index) in tasks" v-bind:class="task.isCompleted ? 'completed' : 'not-completed'">
+      <span>{{task.name}}</span>
+      <span v-if="task.isCompleted">Completed!</span><button v-if="!task.isCompleted" v-on:click="taskCompleted(index)">Still to do!</button>
+    </li>
+  </ul>
+
+  <form v-on:submit.prevent="saveNewTask">
+      <label for="new-task">Add a new task:</label>
+      <input id="new-task" type="text" v-model="newTask"/>
+      <input type="submit" value="Save New Task"/>
+  </form>
+
+    </div>
   </body>
 </html>
